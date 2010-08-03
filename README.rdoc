@@ -1,5 +1,12 @@
 ===DansGuardian
 
-A Ruby library to manage DansGuardian configuration.
+A Ruby library to manage DansGuardian configuration. Based on ConfigFiles by 
+the same author.
+
+== License
+
+Same of Ruby
+
+Copyright (c) 2010 Guido De Rosa <guido.derosa at vemarsas.it>
 
 
