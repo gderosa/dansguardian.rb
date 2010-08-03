@@ -1,0 +1,5 @@
+===DansGuardian
+
+A Ruby library to manage DansGuardian configuration.
+
+
