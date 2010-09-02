@@ -35,8 +35,33 @@ module DansGuardian
         '3' => :squid,
         '4' => :tabs
 
+    validate do |data|
+      true
+    end
 
   end
+
+  module Parser
+
+    extend ConfigFiles::Parser
+
+    def self.read(io)
+      h = {}
+      io.each_line do |line|
+        line.sub! /#.*$/, ''
+        line.strip!
+        case line
+        when /^([^=\s]+)\s*=\s*([^=\s']+)$/ 
+          h[$1.to_sym] = $2
+        when /^([^=\s]+)\s*=\s*'(.*)'$/
+          h[$1.to_sym] = $2.gsub(/\\'/, "'") 
+        end
+      end
+      return h
+    end
+
+  end
+
 end
 
 

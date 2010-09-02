@@ -11,6 +11,9 @@ require 'dansguardian'
 
 dg = DansGuardian::Config.new 
 
-pp dg
+dgp = DansGuardian::Parser.read File.open '/etc/dansguardian/dansguardian.conf'
 
+dg.load dgp
+
+pp dg
 
