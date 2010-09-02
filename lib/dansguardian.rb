@@ -35,7 +35,6 @@ module DansGuardian
         '3' => :squid,
         '4' => :tabs
 
-    parameter 
 
   end
 end
