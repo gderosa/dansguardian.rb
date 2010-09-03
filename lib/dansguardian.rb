@@ -1,3 +1,6 @@
+autoload :IPAddr, 'ipaddr'
+autoload :URI,    'uri'
+
 require 'configfiles'
 
 module DansGuardian
@@ -19,31 +22,56 @@ module DansGuardian
     parameter :language
 
     parameter :loglevel, 
-        '0' => :none,
-        '1' => :just_denied,
-        '2' => :all_text_based,
-        '3' => :all_requests
+        '0'   => :none,
+        '1'   => :just_denied,
+        '2'   => :all_text_based,
+        '3'   => :all_requests
 
     parameter :logexceptionhits,
-        '0' => :never,
-        '1' => :log,
-        '2' => :log_and_mark
+        '0'   => :never,
+        '1'   => :log,
+        '2'   => :log_and_mark
 
     parameter :logfileformat,
-        '1' => :dansguardian,
-        '2' => :csv,
-        '3' => :squid,
-        '4' => :tabs
+        '1'   => :dansguardian,
+        '2'   => :csv,
+        '3'   => :squid,
+        '4'   => :tabs
 
-    validate do |data|
-      true
+    parameter :maxlogitemlength, :to_i
+
+    parameter :anonymizelogs, 'on'  => true, 'off' => false
+    parameter :syslog,        'on'  => true, 'off' => false
+
+    parameter :loglocation
+    parameter :statlocation
+
+    parameter :filterip do |str|
+      if str == ''
+        :any
+      else
+        IPAddr.new str # in case of invalid str, rely on IPAddr exceptions
+      end
     end
+
+    parameter :filterport, :to_i
+
+    parameter :proxyip do |str| 
+      IPAddr.new str
+    end
+
+    parameter :proxyport, :to_i
+
+    parameter :accessdeniedaddress do |str|
+      URI.parse str
+    end
+
+    parameter :nonstandarddelimiter,  'on'  => true, 'off' => false
+    parameter :usecustombannedimage,  'on'  => true, 'off' => false
 
   end
 
   module Parser
-
-    extend ConfigFiles::Parser
 
     def self.read(io)
       h = {}
@@ -51,7 +79,7 @@ module DansGuardian
         line.sub! /#.*$/, ''
         line.strip!
         case line
-        when /^([^=\s]+)\s*=\s*([^=\s']+)$/ 
+        when /^([^=\s]+)\s*=\s*([^=\s']*)$/ 
           h[$1.to_sym] = $2
         when /^([^=\s]+)\s*=\s*'(.*)'$/
           h[$1.to_sym] = $2.gsub(/\\'/, "'") 
