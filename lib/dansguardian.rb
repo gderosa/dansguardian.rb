@@ -163,6 +163,12 @@ module DansGuardian
     parameter :maxcontentfilecachescansize do |str| 
       str.to_i * 1024
     end
+
+    validate do |data|
+      d = data.merge data.__compute_deferred
+      raise ValidationFailed, "maxcontentfiltersize must be not higher than maxcontentramcachescansize" unless
+          d[:maxcontentfiltersize] <= d[:maxcontentramcachescansize]
+    end
    
   end
 
