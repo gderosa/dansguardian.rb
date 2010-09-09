@@ -11,41 +11,33 @@ module DansGuardian
     end
 
     parameter :reportinglevel, 
-       '-1' => :log_only,
-        '0' => :access_denied_only,
-        '1' => :why_but_not_what,
-        '2' => :full,
-        '3' => :html_template    
-    
+     '-1' => :log_only,
+      '0' => :access_denied_only,
+      '1' => :why_but_not_what,
+      '2' => :full,
+      '3' => :html_template    
     parameter :languagedir
-
     parameter :language
-
     parameter :loglevel, 
-        '0'   => :none,
-        '1'   => :just_denied,
-        '2'   => :all_text_based,
-        '3'   => :all_requests
-
+      '0'   => :none,
+      '1'   => :just_denied,
+      '2'   => :all_text_based,
+      '3'   => :all_requests
     parameter :logexceptionhits,
-        '0'   => :never,
-        '1'   => :log,
-        '2'   => :log_and_mark
-
+      '0'   => :never,
+      '1'   => :log,
+      '2'   => :log_and_mark
+    default   :logexceptionhits,      :log_and_mark
     parameter :logfileformat,
-        '1'   => :dansguardian,
-        '2'   => :csv,
-        '3'   => :squid,
-        '4'   => :tabs
-
-    parameter :maxlogitemlength, :to_i
-
-    parameter :anonymizelogs, 'on'  => true, 'off' => false
-    parameter :syslog,        'on'  => true, 'off' => false
-
+      '1'   => :dansguardian,
+      '2'   => :csv,
+      '3'   => :squid,
+      '4'   => :tabs
+    parameter :maxlogitemlength,      :to_i
+    parameter :anonymizelogs,         'on'  => true, 'off' => false
+    parameter :syslog,                'on'  => true, 'off' => false
     parameter :loglocation
     parameter :statlocation
-
     parameter :filterip do |str|
       if str == ''
         :any
@@ -53,21 +45,25 @@ module DansGuardian
         IPAddr.new str # in case of invalid str, rely on IPAddr exceptions
       end
     end
-
-    parameter :filterport, :to_i
-
+    parameter :filterport,            :to_i
     parameter :proxyip do |str| 
       IPAddr.new str
     end
-
-    parameter :proxyport, :to_i
-
+    default   :proxyip,               IPAddr.new('127.0.0.1')
+    parameter :proxyport,             :to_i
     parameter :accessdeniedaddress do |str|
       URI.parse str
     end
-
     parameter :nonstandarddelimiter,  'on'  => true, 'off' => false
+    default   :nonstandarddelimiter,  true
     parameter :usecustombannedimage,  'on'  => true, 'off' => false
+    default   :usecustombannedimage,  true
+    parameter :custombannedimagefile
+    parameter :filtergroups,          :to_i
+    parameter :filtergroupslist
+    parameter :bannediplist
+    parameter :exceptioniplist
+    parameter :showweightedfound,     'on'  => true, 'off' => false
 
   end
 

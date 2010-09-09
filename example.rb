@@ -9,9 +9,12 @@ require 'pp'
 require 'configfiles'
 require 'dansguardian'
 
+file = '/etc/dansguardian/dansguardian.conf'
+# file = '/dev/null'
+
 dg = DansGuardian::Config.new 
 
-dgp = DansGuardian::Parser.read File.open '/etc/dansguardian/dansguardian.conf'
+dgp = DansGuardian::Parser.read File.open file
 
 dg.load dgp
 
