@@ -18,5 +18,13 @@ dgp = DansGuardian::Parser.read File.open file
 
 dg.load dgp
 
-pp dg
+new_h = {}
+
+dg.data.each_pair do |k, v|
+  if v.is_a? Proc
+     new_h[k] = v.call(dg.data)
+  end
+end
+
+p new_h
 
