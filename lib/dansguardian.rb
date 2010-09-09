@@ -64,6 +64,16 @@ module DansGuardian
     parameter :bannediplist
     parameter :exceptioniplist
     parameter :showweightedfound,     'on'  => true, 'off' => false
+    parameter :weightedphrasemode,
+      '0'   => :off,
+      '1'   => :normal,
+      '2'   => :singular
+    parameter :urlcachenumber,        :to_i
+    parameter :urlcacheage,           :to_i 
+        # seconds, TODO: class TimeInterval ?
+
+
+    end
 
   end
 
