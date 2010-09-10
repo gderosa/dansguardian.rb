@@ -9,6 +9,8 @@ module DansGuardian
 
     BOOL = {'on'  => true, 'off' => false} # Boolean converter
 
+    INFINITY = ::Float::INFINITY
+
     class ValidationFailed < ValidationFailed; end
 
     on :unknown_parameter do |s|
@@ -138,7 +140,7 @@ module DansGuardian
     parameter   :maxuploadsize do |str|
       case str
       when '-1'
-        false
+        INFINITY
       else
         str.to_i * 1024
       end
@@ -175,9 +177,49 @@ module DansGuardian
 
     parameter   :trickledelay,                :to_i
 
-    # You don't really ned to lazy-evaluate a (short) Array
-    # enumerator  :downloadmanager
-    parameter   :downloadmanager              # Array
+    # You don't really need to lazy-evaluate (short) Arrays
+    #
+    parameter   :downloadmanager              # Array    
+    parameter   :contentscanner               # Array
+    parameter   :authplugin                   # Array
+
+    parameter   :contentscannertimeout,       :to_i
+    default     :contentscannertimeout,       60
+
+    parameter   :contentscanexceptions,       BOOL
+    default     :contentscanexceptions,       false
+
+    parameter   :recheckreplacedurls,         BOOL
+    default     :recheckreplacedurls,         false
+
+    [
+      :forwardedfor, 
+      :usexforwardedfor, 
+      :logconnectionhandlingerrors
+    ].each do |par|
+      parameter par,                          BOOL
+    end
+
+    parameter   :logchildprocesshandling,     BOOL
+
+    [
+      :maxchildren, 
+      :minchildren, 
+      :minsparechildren, 
+      :preforkchildren, 
+      :maxsparechildren, 
+      :maxagechildren
+    ].each do |par|
+      parameter par,                          :to_i
+    end
+
+    parameter   :maxips do |str|
+      if str == '0'
+        INFINITY
+      else
+        str.to_i
+      end
+    end
 
     validate do |data|
       d = data.merge data.__compute_deferred
@@ -195,7 +237,8 @@ module DansGuardian
 
     def self.read(io)
       h = {}
-      may_appear_multiple_times = [:downloadmanager]
+      may_appear_multiple_times = [
+        :downloadmanager, :contentscanner, :authplugin]
       io.each_line do |line|
         line.sub! /#.*$/, ''
         line.strip!
