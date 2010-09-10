@@ -4,8 +4,10 @@ autoload :Set,    'set'
 
 require 'configfiles'
 
+require 'dansguardian/extensions/float'
+
 module DansGuardian
-  class Config < ConfigFiles::Base
+  class Config < ::ConfigFiles::Base
 
     # Useful constants
     INFINITY = ::Float::INFINITY
