@@ -7,52 +7,54 @@ require 'configfiles'
 module DansGuardian
   class Config < ConfigFiles::Base
 
-    BOOL = {'on'  => true, 'off' => false}
+    BOOL = {'on'  => true, 'off' => false} # Boolean converter
+
+    class ValidationFailed < ValidationFailed; end
 
     on :unknown_parameter do |s|
       "FIXME: unknown parameter: value = #{s}"  
     end
 
-    parameter :reportinglevel, 
-     '-1' => :log_only,
-      '0' => :access_denied_only,
-      '1' => :why_but_not_what,
-      '2' => :full,
-      '3' => :html_template    
+    parameter   :reportinglevel, 
+     '-1'   =>    :log_only,
+      '0'   =>    :access_denied_only,
+      '1'   =>    :why_but_not_what,
+      '2'   =>    :full,
+      '3'   =>    :html_template    
 
-    parameter :languagedir
+    parameter   :languagedir
 
-    parameter :language
+    parameter   :language
 
-    parameter :loglevel, 
-      '0'   => :none,
-      '1'   => :just_denied,
-      '2'   => :all_text_based,
-      '3'   => :all_requests
+    parameter   :loglevel, 
+      '0'   =>    :none,
+      '1'   =>    :just_denied,
+      '2'   =>    :all_text_based,
+      '3'   =>    :all_requests
 
-    parameter :logexceptionhits,
-      '0'   => :never,
-      '1'   => :log,
-      '2'   => :log_and_mark
-    default   :logexceptionhits,        :log_and_mark
+    parameter   :logexceptionhits,
+      '0'   =>    :never,
+      '1'   =>    :log,
+      '2'   =>    :log_and_mark
+    default     :logexceptionhits,            :log_and_mark
     
-    parameter :logfileformat,
-      '1'   => :dansguardian,
-      '2'   => :csv,
-      '3'   => :squid,
-      '4'   => :tabs
+    parameter   :logfileformat,
+      '1'   =>    :dansguardian,
+      '2'   =>    :csv,
+      '3'   =>    :squid,
+      '4'   =>    :tabs
     
-    parameter :maxlogitemlength,        :to_i
+    parameter   :maxlogitemlength,            :to_i
     
-    parameter :anonymizelogs,           BOOL
+    parameter   :anonymizelogs,               BOOL
     
-    parameter :syslog,                  BOOL
+    parameter   :syslog,                      BOOL
     
-    parameter :loglocation
+    parameter   :loglocation
     
-    parameter :statlocation
+    parameter   :statlocation
     
-    parameter :filterip do |str|
+    parameter   :filterip do |str|
       if str == ''
         :any
       else
@@ -60,80 +62,80 @@ module DansGuardian
       end
     end
     
-    parameter :filterport,              :to_i
+    parameter   :filterport,                  :to_i
     
-    parameter :proxyip do |str| 
+    parameter   :proxyip do |str| 
       IPAddr.new str
     end
-    default   :proxyip,                 IPAddr.new('127.0.0.1')
+    default     :proxyip,                     IPAddr.new('127.0.0.1')
     
-    parameter :proxyport,               :to_i
+    parameter   :proxyport,                   :to_i
     
-    parameter :accessdeniedaddress do |str|
+    parameter   :accessdeniedaddress do |str|
       URI.parse str
     end
     
-    parameter :nonstandarddelimiter,    BOOL
-    default   :nonstandarddelimiter,    true
+    parameter   :nonstandarddelimiter,        BOOL
+    default     :nonstandarddelimiter,        true
     
-    parameter :usecustombannedimage,    BOOL
-    default   :usecustombannedimage,    true
+    parameter   :usecustombannedimage,        BOOL
+    default     :usecustombannedimage,        true
     
-    parameter :custombannedimagefile
+    parameter   :custombannedimagefile
     
-    parameter :filtergroups,            :to_i
+    parameter   :filtergroups,                :to_i
     
-    parameter :filtergroupslist
+    parameter   :filtergroupslist
     
-    parameter :bannediplist
+    parameter   :bannediplist
     
-    parameter :exceptioniplist
+    parameter   :exceptioniplist
     
-    parameter :showweightedfound,       BOOL
+    parameter   :showweightedfound,           BOOL
     
-    parameter :weightedphrasemode,
+    parameter   :weightedphrasemode,
       '0'   => false,
       '1'   => :normal,
       '2'   => :singular
     
-    parameter :urlcachenumber,          :to_i
+    parameter   :urlcachenumber,              :to_i
     
-    parameter :urlcacheage,             :to_i 
+    parameter   :urlcacheage,                 :to_i 
         # seconds, TODO: class Time::Interval ?
     
-    parameter :scancleancache,          BOOL
-    default   :scancleancache,          true
+    parameter   :scancleancache,              BOOL
+    default     :scancleancache,              true
     
-    parameter :phrasefiltermode,
+    parameter   :phrasefiltermode,
       '0'   =>  Set.new([:meta,  :title,         :raw]),
       '1'   =>  Set.new([:meta,  :title, :smart      ]),
       '2'   =>  Set.new([:meta,  :title, :smart, :raw]),
       '3'   =>  Set.new([:meta,  :title              ])
-    default   :phrasefiltermode,  
+    default     :phrasefiltermode,  
                 Set.new([:meta,  :title, :smart, :raw])
     
-    parameter :preservecase,
-      '0'   =>  Set.new([:lower]),
-      '1'   =>  Set.new([:original]),
-      '2'   =>  Set.new([:lower, :original]) 
-    default   :preservecase, 
-                Set.new([:lower])
+    parameter   :preservecase,
+      '0'   =>  Set.new([:lower             ]),
+      '1'   =>  Set.new([         :original ]),
+      '2'   =>  Set.new([:lower,  :original ]) 
+    default     :preservecase, 
+                Set.new([:lower             ])
     
-    parameter :hexdecodecontent,        BOOL
-    default   :hexdecodecontent,        false
+    parameter   :hexdecodecontent,            BOOL
+    default     :hexdecodecontent,            false
     
-    parameter :forcequicksearch,        BOOL
-    default   :forcequicksearch,        false
+    parameter   :forcequicksearch,            BOOL
+    default     :forcequicksearch,            false
 
-    parameter :reverseaddresslookups,   BOOL
+    parameter   :reverseaddresslookups,       BOOL
 
-    parameter :reverseclientiplookups,  BOOL
+    parameter   :reverseclientiplookups,      BOOL
 
-    parameter :logclienthostnames,      BOOL
+    parameter   :logclienthostnames,          BOOL
 
-    parameter :createlistcachefiles,    BOOL
+    parameter   :createlistcachefiles,        BOOL
 
-    parameter :maxuploadsize do |str|
+    parameter   :maxuploadsize do |str|
       case str
       when '-1'
         false
@@ -142,7 +144,7 @@ module DansGuardian
       end
     end
 
-    parameter :maxcontentfiltersize do |str|
+    parameter   :maxcontentfiltersize do |str|
       case str
       when '0'
         lambda {|confdata| confdata.maxcontentramcachescansize} 
@@ -151,7 +153,7 @@ module DansGuardian
       end
     end
 
-    parameter :maxcontentramcachescansize do |str|
+    parameter   :maxcontentramcachescansize do |str|
       case str
       when '0'
         lambda {|confdata| confdata.maxcontentfilecachescansize}
@@ -160,14 +162,31 @@ module DansGuardian
       end
     end
 
-    parameter :maxcontentfilecachescansize do |str| 
+    parameter   :maxcontentfilecachescansize do |str| 
       str.to_i * 1024
     end
+
+    parameter   :filecachedir
+
+    parameter   :deletedownloadedtempfiles,   BOOL
+    default     :deletedownloadedtempfiles,   true
+
+    parameter   :initialtrickledelay,         :to_i
+
+    parameter   :trickledelay,                :to_i
+
+    # You don't really ned to lazy-evaluate a (short) Array
+    # enumerator  :downloadmanager
+    parameter   :downloadmanager              # Array
 
     validate do |data|
       d = data.merge data.__compute_deferred
       raise ValidationFailed, "maxcontentfiltersize must be not higher than maxcontentramcachescansize" unless
           d[:maxcontentfiltersize] <= d[:maxcontentramcachescansize]
+      raise ValidationFailed, "maxcontentramcachescansize must be not higher than maxcontentfilecachescansize" unless
+          d[:maxcontentramcachescansize] <= d[:maxcontentfilecachescansize]
+      raise ValidationFailed, "maxcontentfilecachescansize must be greater or equal to maxcontentramcachescansize" unless
+          d[:maxcontentfilecachescansize] >= d[:maxcontentramcachescansize]
     end
    
   end
@@ -176,14 +195,28 @@ module DansGuardian
 
     def self.read(io)
       h = {}
+      may_appear_multiple_times = [:downloadmanager]
       io.each_line do |line|
         line.sub! /#.*$/, ''
         line.strip!
+        match = false
         case line
         when /^([^=\s]+)\s*=\s*([^=\s']*)$/ 
-          h[$1.to_sym] = $2
+          key = $1.to_sym
+          value = $2
+          match = true
         when /^([^=\s]+)\s*=\s*'(.*)'$/
-          h[$1.to_sym] = $2.gsub(/\\'/, "'") 
+          key = $1.to_sym
+          value = $2.gsub(/\\'/, "'")
+          match = true
+        end
+        if match
+          if may_appear_multiple_times.include? key 
+            h[key] ||= []
+            h[key] << value
+          else
+            h[key] = value
+          end
         end
       end
       return h

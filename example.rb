@@ -20,3 +20,4 @@ dg.load dgp
 
 p dg.deferred_data 
 
+p dg.data.downloadmanager#.to_a
