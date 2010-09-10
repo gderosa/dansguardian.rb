@@ -7,10 +7,13 @@ require 'configfiles'
 module DansGuardian
   class Config < ConfigFiles::Base
 
-    BOOL = {'on'  => true, 'off' => false} # Boolean converter
-
+    # Useful constants
     INFINITY = ::Float::INFINITY
 
+    # Recurring converters
+    BOOL = {'on'  => true, 'off' => false} 
+
+    # Exceptions
     class ValidationFailed < ValidationFailed; end
 
     on :unknown_parameter do |s|
@@ -149,7 +152,7 @@ module DansGuardian
     parameter   :maxcontentfiltersize do |str|
       case str
       when '0'
-        lambda {|confdata| confdata.maxcontentramcachescansize} 
+        lambda {|confdata| confdata[:maxcontentramcachescansize]} 
       else
         str.to_i * 1024
       end
@@ -158,7 +161,7 @@ module DansGuardian
     parameter   :maxcontentramcachescansize do |str|
       case str
       when '0'
-        lambda {|confdata| confdata.maxcontentfilecachescansize}
+        lambda {|confdata| confdata[:maxcontentfilecachescansize]}
       else
         str.to_i * 1024
       end
@@ -221,8 +224,7 @@ module DansGuardian
       end
     end
 
-    validate do |data|
-      d = data.merge data.__compute_deferred
+    validate do |d|
       raise ValidationFailed, "maxcontentfiltersize must be not higher than maxcontentramcachescansize" unless
           d[:maxcontentfiltersize] <= d[:maxcontentramcachescansize]
       raise ValidationFailed, "maxcontentramcachescansize must be not higher than maxcontentfilecachescansize" unless
