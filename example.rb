@@ -19,4 +19,3 @@ dgp = DansGuardian::Parser.read File.open file
 dg.load dgp
 
 pp dg
-p dg.deferred_data
