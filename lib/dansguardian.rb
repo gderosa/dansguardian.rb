@@ -236,9 +236,21 @@ module DansGuardian
       default   p,                            false
     end
 
-    virtual     :daemon do |confdata|
-      not(confdata[:nodaemon]) 
+    [:daemon, :logger].each do |name|
+      virtual     name do |confdata|
+        not(confdata["no#{name}".to_sym]) 
+      end
     end
+
+    [:daemonuser, :daemongroup].each do |name|
+      parameter name
+      default   name, :set_at_compile_time
+    end
+
+    parameter   :softrestart,                 BOOL
+    default     :softrestart,                 false
+
+    parameter   :mailer
 
     validate do |conf|
 
