@@ -236,19 +236,24 @@ module DansGuardian
       default   p,                            false
     end
 
-    # TODO: implement ConfigFileas::Base.virtual
-    parameter :daemon do |str|
-      fail 'virtual parameter !!'
+    virtual     :daemon do |confdata|
+      not(confdata[:nodaemon]) 
     end
-    default :daemon, lambda{|confdata| !confdata[:nodaemon]}  
 
-    validate do |d|
+    validate do |conf|
+
       raise ValidationFailed, "maxcontentfiltersize must be not higher than maxcontentramcachescansize" unless
-          d[:maxcontentfiltersize] <= d[:maxcontentramcachescansize]
+          conf[:maxcontentfiltersize] <= 
+              conf[:maxcontentramcachescansize]
+
       raise ValidationFailed, "maxcontentramcachescansize must be not higher than maxcontentfilecachescansize" unless
-          d[:maxcontentramcachescansize] <= d[:maxcontentfilecachescansize]
+          conf[:maxcontentramcachescansize] <= 
+              conf[:maxcontentfilecachescansize]
+
       raise ValidationFailed, "maxcontentfilecachescansize must be greater or equal to maxcontentramcachescansize" unless
-          d[:maxcontentfilecachescansize] >= d[:maxcontentramcachescansize]
+          conf[:maxcontentfilecachescansize] >= 
+              conf[:maxcontentramcachescansize]
+
     end
    
   end
