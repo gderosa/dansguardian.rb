@@ -19,3 +19,6 @@ dgp = DansGuardian::Parser.read File.open file
 dg.load dgp
 
 pp dg
+
+dg[:proxyip] = IPAddr.new('2.3.4.5')
+
