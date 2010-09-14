@@ -18,7 +18,13 @@ dgp = DansGuardian::Parser.read File.open file
 
 dg.load dgp
 
-pp dg
 
 dg[:proxyip] = IPAddr.new('2.3.4.5')
+
+#dg.each do |k, v|
+#  puts "#{k} --> #{v}"
+#end
+
+pp dg
+pp DansGuardian::Config.behavior_on :unknown_value
 

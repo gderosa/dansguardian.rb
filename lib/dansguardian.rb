@@ -226,6 +226,22 @@ module DansGuardian
       end
     end
 
+    [:ipcfilename, :urlipcfilename, :ipipcfilename, :pidfilename].each do |p|
+      parameter p
+    end
+    default     :pidfilename,                 '/var/run/dansguardian.pid'
+
+    [:nodaemon, :nologger, :logadblocks, :loguseragent].each do |p|
+      parameter p,                            BOOL
+      default   p,                            false
+    end
+
+    # TODO: implement ConfigFileas::Base.virtual
+    parameter :daemon do |str|
+      fail 'virtual parameter !!'
+    end
+    default :daemon, lambda{|confdata| !confdata[:nodaemon]}  
+
     validate do |d|
       raise ValidationFailed, "maxcontentfiltersize must be not higher than maxcontentramcachescansize" unless
           d[:maxcontentfiltersize] <= d[:maxcontentramcachescansize]
