@@ -4,6 +4,6 @@ autoload :Set,    'set'
 
 require 'configfiles'
 
-require 'dansguardian/config'
+require 'dansguardian/config/main'
 require 'dansguardian/parser'
 

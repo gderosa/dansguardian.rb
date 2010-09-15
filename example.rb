@@ -12,7 +12,7 @@ require 'dansguardian'
 file = '/etc/dansguardian/dansguardian.conf'
 # file = '/dev/null'
 
-dg = DansGuardian::Config.new 
+dg = DansGuardian::Config::Main.new 
 
 dgp = DansGuardian::Parser.read File.open file
 
@@ -26,5 +26,5 @@ dg[:proxyip] = IPAddr.new('2.3.4.5')
 #end
 
 pp dg
-pp DansGuardian::Config.behavior_on :unknown_value
+pp DansGuardian::Config::Main.behavior_on :unknown_value
 
