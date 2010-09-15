@@ -7,9 +7,7 @@ end
 require 'rubygems'
 require 'pp'
 require 'configfiles'
-require 'dansguardian/parser'
-require 'dansguardian/config/main'
-require 'dansguardian/config/filtergroup'
+require 'dansguardian'
 
 file = '/etc/dansguardian/dansguardianf1.conf'
 # file = '/dev/null'

@@ -22,12 +22,7 @@ module DansGuardian
         "FIXME: unknown parameter: value = #{s}"  
       end
 
-      parameter   :reportinglevel, 
-       '-1'   =>    :log_only,
-        '0'   =>    :access_denied_only,
-        '1'   =>    :why_but_not_what,
-        '2'   =>    :full,
-        '3'   =>    :html_template    
+      parameter   :reportinglevel,              REPORTING_LEVEL
 
       parameter   :languagedir
 
