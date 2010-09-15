@@ -10,7 +10,7 @@ module DansGuardian
       BOOL = {'on'  => true, 'off' => false}
 
       # Exceptions
-      class ValidationFailed < ConfigFiles::Base::ValidationFailed; end
+      class ValidationFailed < ::ConfigFiles::Base::ValidationFailed; end
 
   end
 end

@@ -7,24 +7,18 @@ end
 require 'rubygems'
 require 'pp'
 require 'configfiles'
-require 'dansguardian'
+require 'dansguardian/parser'
+require 'dansguardian/config/main'
+require 'dansguardian/config/filtergroup'
 
-file = '/etc/dansguardian/dansguardian.conf'
+file = '/etc/dansguardian/dansguardianf1.conf'
 # file = '/dev/null'
 
-dg = DansGuardian::Config::Main.new 
+dgf = DansGuardian::Config::FilterGroup.new 
 
 dgp = DansGuardian::Parser.read File.open file
 
-dg.load dgp
+dgf.load dgp
 
-
-dg[:proxyip] = IPAddr.new('2.3.4.5')
-
-#dg.each do |k, v|
-#  puts "#{k} --> #{v}"
-#end
-
-pp dg
-pp DansGuardian::Config::Main.behavior_on :unknown_value
+pp dgf
 
