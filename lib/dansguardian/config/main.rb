@@ -3,6 +3,7 @@ autoload :URI,    'uri'
 autoload :Set,    'set'
 
 require 'dansguardian/extensions/float'
+require 'dansguardian/config/constants'
 
 module DansGuardian
   module Config
