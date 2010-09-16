@@ -35,6 +35,7 @@ module DansGuardian
         :bannedextensionlist,
         :headerregexplist,
         :bannedregexpheaderlist,
+        :bannedmimetypelist,
 
         :exceptionextensionlist,
         :exceptionmimetypelist,
