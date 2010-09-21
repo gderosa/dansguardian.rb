@@ -1,7 +1,7 @@
 require 'configfiles'
 
 module DansGuardian
-  module Config
+  class Config
 
       # Useful constants
       INFINITY = ::Float::INFINITY

@@ -3,7 +3,7 @@ autoload :URI, 'uri'
 require 'dansguardian/config/constants'
 
 module DansGuardian
-  module Config
+  class Config
     class FilterGroup < ::ConfigFiles::Base
 
       on :unknown_parameter do |s|

@@ -6,7 +6,7 @@ require 'dansguardian/extensions/float'
 require 'dansguardian/config/constants'
 
 module DansGuardian
-  module Config
+  class Config
     class Main < ::ConfigFiles::Base
 
       # Useful constants
