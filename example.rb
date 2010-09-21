@@ -9,14 +9,23 @@ require 'pp'
 require 'configfiles'
 require 'dansguardian'
 
-file = '/etc/dansguardian/dansguardianf1.conf'
+file = '/etc/dansguardian/dansguardian.conf'
 # file = '/dev/null'
 
-dgf = DansGuardian::Config::FilterGroup.new 
+dgm = DansGuardian::Config::Main.new 
 
-dgp = DansGuardian::Parser.read File.open file
 
-dgf.load dgp
+dgp = DansGuardian::Parser.read_file file
+dgm.load dgp
+pp dgm
 
-pp dgf
+#dg = DansGuardian::Object.new(:mainconfigfile => '/etc/dansguardian/dansguardian.conf')
+
+#dg.config.main
+
+#dg.config.filtergroup(1) 
+
+#dg.config.filtergroup(1).inclusiontree('weightedphraselist')
+
+
 

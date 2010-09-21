@@ -1,5 +1,6 @@
 module DansGuardian
   module Parser
+
     def self.read(io)
       h = {}
       may_appear_multiple_times = [
@@ -29,6 +30,13 @@ module DansGuardian
       end
       return h
     end
+
+    def self.read_file(filepath)
+      File.open filepath, 'r' do |f|
+        read f
+      end
+    end
+
   end
 end
 
