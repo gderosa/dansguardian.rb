@@ -19,32 +19,37 @@ module DansGuardian
 
       [
         :bannedphraselist,
-        :weightedphraselist,
-        :exceptionphraselist,
         :bannedsitelist,
-        :greysitelist,
-        :exceptionsitelist,
         :bannedurllist,
-        :greyurllist,
-        :exceptionurllist,
-        :exceptionregexpurllist,
         :bannedregexpurllist,
-        :picsfile,
-        :contentregexplist,
-        :urlregexplist,
         :bannedextensionlist,
-        :headerregexplist,
         :bannedregexpheaderlist,
         :bannedmimetypelist,
+        :headerregexplist, # ban
+
+        :weightedphraselist,
+
+        :greysitelist,
+        :greyurllist,
+
+        :contentregexplist, # modify
+        :urlregexplist,     # modify
 
         :exceptionextensionlist,
         :exceptionmimetypelist,
         :exceptionfilesitelist,
         :exceptionfileurllist,
-
+        :exceptionphraselist,
+        :exceptionsitelist,
+        :exceptionurllist,
+        :exceptionregexpurllist,
+ 
         :logsitelist,
         :logurllist,
-        :logregexpurllist
+        :logregexpurllist,
+
+        :picsfile,
+
       ].each do |name|
         parameter name 
       end
