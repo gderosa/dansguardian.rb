@@ -1,5 +1,6 @@
 module DansGuardian
   module Inclusion
+    # no distinction between text parser and ConfigFile conversion here ...
     def self.get(filename)
       all = {}
       File.foreach filename do |line|
