@@ -20,13 +20,15 @@ dgconf = DansGuardian::Config.new(:mainfile => file)
 
 dgconf.main
 
-1000.times do
-  dgconf.filtergroup(1, :cached => true) 
-end
+dgconf.filtergroup(1, :cached => true) 
 
-#dgconf.filtergroup(1).inclusiontree(:weightedphraselist)
+wfl = dgconf.filtergroup(1)[:weightedphraselist]
 
-#DansGuardian::List.get(__args__) 
+p wfl
+
+pp DansGuardian::Inclusion.get(wfl) 
+
+
 
 
 
