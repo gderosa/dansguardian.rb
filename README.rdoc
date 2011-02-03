@@ -3,6 +3,32 @@
 A Ruby library to manage DansGuardian configuration. Based on ConfigFiles by 
 the same author.
 
+  require 'rubygems'
+  require 'pp'
+  require 'configfiles'
+  require 'dansguardian'
+
+  file = '/etc/dansguardian/dansguardian.conf'
+
+  #dgm = DansGuardian::Config::Main.new 
+  #dgp = DansGuardian::Parser.read_file file
+  #dgm.load dgp
+  #pp dgm
+
+  dgconf = DansGuardian::Config.new(:mainfile => file)
+
+  dgconf.main
+
+  dgconf.filtergroup(1, :cached => true) 
+
+  wfl = dgconf.filtergroup(1)[:weightedphraselist]
+
+  p wfl
+
+  pp DansGuardian::Inclusion.get(wfl) 
+
+  #dg.config.filtergroup(1).inclusiontree('weightedphraselist')
+
 == License
 
 Same of Ruby
