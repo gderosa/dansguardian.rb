@@ -9,5 +9,6 @@ module DansGuardian
 
   autoload :Config,     'dansguardian/config'
   autoload :Parser,     'dansguardian/parser'
+  autoload :Updater,    'dansguardian/updater'
   autoload :Inclusion,  'dansguardian/inclusion'
 end

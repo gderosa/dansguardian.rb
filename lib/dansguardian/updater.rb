@@ -30,7 +30,7 @@ module DansGuardian
               yield "#{key} = #{val}"
             end
           else
-            yield "#{key} = #{val}"
+            yield "#{key} = #{new_value}"
           end
           already_written << key
           # next # "optimized out"

@@ -23,7 +23,8 @@ Gem::Specification.new do |s|
     "lib/dansguardian/extensions/float.rb",
     "lib/dansguardian/config.rb",
     "lib/dansguardian/inclusion.rb",
-    "lib/dansguardian/parser.rb"
+    "lib/dansguardian/parser.rb",
+    "lib/dansguardian/updater.rb"
   ]
   s.homepage = %q{http://github.com/gderosa/dansguardian.rb}
   s.rdoc_options = ["--main", "README.rdoc"]
