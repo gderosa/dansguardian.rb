@@ -16,9 +16,10 @@ module DansGuardian
         '2' => :unfiltered
       }
       parameter :groupmode, GROUPMODE
+      default 	:groupmode, :filtered
       
       parameter :groupname
-
+      default   :groupname, ''
 
       [
         :bannedphraselist,
