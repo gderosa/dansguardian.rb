@@ -10,12 +10,15 @@ module DansGuardian
         "FIXME: unknown parameter: value = #{s}"  
       end
 
-      parameter :groupmode,
+      GROUPMODE = {
         '0' => :banned,
         '1' => :filtered,
         '2' => :unfiltered
-
+      }
+      parameter :groupmode, GROUPMODE
+      
       parameter :groupname
+
 
       [
         :bannedphraselist,
