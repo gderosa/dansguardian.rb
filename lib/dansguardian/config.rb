@@ -35,7 +35,7 @@ module DansGuardian
     end
 
     # get filtergroup configuration data
-    def filtergroup(n=1, opt_h={:cached => false})
+    def filtergroup(n=1, opt_h={:cached => true})
       if opt_h[:cached]
         if @filtergroups[n]
           return @filtergroups[n]
