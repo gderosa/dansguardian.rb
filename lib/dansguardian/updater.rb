@@ -39,8 +39,17 @@ module DansGuardian
           # next # "optimized out"
         end
       end
-    end
 
+      to_be_written = 
+          data.keys.map{|k| k.to_sym} - already_written.map{|k| k.to_sym}
+      if to_be_written.length > 0
+        yield ""
+        yield "# Added by ::#{self} :"
+        to_be_written.each do |k|
+          yield "#{k} = #{data[k] || data[k.to_s]}" 
+        end
+      end
+    end
   end
 end
 
