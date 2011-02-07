@@ -140,7 +140,7 @@ module DansGuardian
       parameter   :maxuploadsize do |str|
         case str
         when '-1'
-          INFINITY
+          -1 # should be easily interpreted as 'unlimited'          
         else
           str.to_i * 1024
         end
@@ -213,13 +213,7 @@ module DansGuardian
         parameter par,                          :to_i
       end
 
-      parameter   :maxips do |str|
-        if str == '0'
-          INFINITY
-        else
-          str.to_i
-        end
-      end
+      parameter   :maxips,                      :to_i # 0 = unlimited
 
       [:ipcfilename, :urlipcfilename, :ipipcfilename, :pidfilename].each do |p|
         parameter p
