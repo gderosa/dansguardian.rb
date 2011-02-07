@@ -4,7 +4,7 @@ module DansGuardian
   class Config
 
       # Useful constants
-      INFINITY = ::Float::INFINITY
+      INFINITY = ::Float::INFINITY # do not use, JSON issues!!!
 
       # Recurring converters
       BOOL = {
