@@ -2,17 +2,18 @@ module DansGuardian
   # this class does not inherit from ConfigFiles::Base
   class List
 
-    attr_reader :items, :includes
+    attr_reader :items, :includes, :listcategory
 
     #   DansGuardian::List.new(:file = '/path/to/list')
     def initialize(h={})
       if h.is_a? String
-        @init = {:file => h}
+        @init         = {:file => h}
       else
-        @init     = h      
+        @init         = h      
       end
-      @items    = []
-      @includes = []
+      @items        = []
+      @includes     = []
+      @listcategory = nil
 
       read! if @init[:file] 
     end
@@ -24,6 +25,11 @@ module DansGuardian
     def read!
       File.foreach(@init[:file]) do |line|
         line.strip!
+        # Special comment used to "categorize" DG message pages
+        if line =~ /^#listcategory:\s*"(.*)"/ 
+          @listcategory = $1
+          next
+        end
         next if line =~ /^\s*#/
         line.sub! /\s#.*$/, '' # remove comments but allow http://url#anchor 
         if    line =~ /^\.Include<(.*)>/
