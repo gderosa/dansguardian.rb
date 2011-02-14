@@ -15,7 +15,7 @@ module DansGuardian
       @includes     = []
       @listcategory = nil
 
-      read! if @init[:file] 
+      #read! if @init[:file] 
     end
 
     def filename; @init[:file]; end
