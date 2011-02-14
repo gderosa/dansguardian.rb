@@ -22,17 +22,18 @@ dgconf.main
 
 dgconf.filtergroup(1, :cached => true) 
 
-wfl = dgconf.filtergroup(1)[:weightedphraselist]
+listfile = dgconf.filtergroup(1)[:weightedphraselist]
+listobject = DansGuardian::List.new(:file => listfile)
+pp listobject
 
-p wfl
-
-pp DansGuardian::Inclusion.get(wfl) 
-
-
+listfile2 = "/etc/dansguardian/lists/phraselists/goodphrases/weighted_news"
+listobject2 = DansGuardian::List.new(listfile2)
+pp listobject2
 
 
 
-#dg.config.filtergroup(1).inclusiontree('weightedphraselist')
+
+
 
 
 
