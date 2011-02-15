@@ -5,7 +5,7 @@ autoload :Set,    'set'
 require 'configfiles'
 
 module DansGuardian
-  VERSION = '0.1.0'
+  VERSION = '0.2.0'
 
   autoload :Config,     'dansguardian/config'
   autoload :Parser,     'dansguardian/parser'
