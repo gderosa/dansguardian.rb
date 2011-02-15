@@ -28,6 +28,7 @@ pp listobject
 
 listfile2 = "/etc/dansguardian/lists/phraselists/goodphrases/weighted_news"
 listobject2 = DansGuardian::List.new(listfile2)
+listobject2.read!
 pp listobject2
 
 
