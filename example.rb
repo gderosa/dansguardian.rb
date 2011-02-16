@@ -20,7 +20,7 @@ dgconf = DansGuardian::Config.new(:mainfile => file)
 
 dgconf.main
 
-dgconf.filtergroup(1, :cached => true) 
+fg1 = dgconf.filtergroup(1, :cached => true) 
 
 listfile = dgconf.filtergroup(1)[:weightedphraselist]
 listobject = DansGuardian::List.new(:file => listfile)

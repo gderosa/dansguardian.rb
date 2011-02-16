@@ -21,13 +21,14 @@ the same author.
 
   dgconf.filtergroup(1, :cached => true) 
 
-  wfl = dgconf.filtergroup(1)[:weightedphraselist]
+	listfile = dgconf.filtergroup(1)[:weightedphraselist]
+	listobject = DansGuardian::List.new(:file => listfile)
+	pp listobject
 
-  p wfl
-
-  pp DansGuardian::Inclusion.get(wfl) 
-
-  #dg.config.filtergroup(1).inclusiontree('weightedphraselist')
+	listfile2 = "/etc/dansguardian/lists/phraselists/goodphrases/weighted_news"
+	listobject2 = DansGuardian::List.new(listfile2)
+	listobject2.read!
+	pp listobject2
 
 == License
 
