@@ -1,3 +1,7 @@
+0.2.2 (2011-02-16)
+
+* force binary encoding when reading lists (be charset-agnostic) 
+
 0.2.1 (2011-02-15)
 
 * fix gemspec
