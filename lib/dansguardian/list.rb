@@ -25,6 +25,7 @@ module DansGuardian
     def read!
       File.foreach(@init[:file]) do |line|
         line.strip!
+        line.force_encoding Encoding::BINARY
         # Special comment used to "categorize" DG message pages
         if line =~ /^#listcategory:\s*"(.*)"/ 
           @listcategory = $1
