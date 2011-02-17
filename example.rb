@@ -26,8 +26,11 @@ listfile = dgconf.filtergroup(1)[:weightedphraselist]
 listobject = DansGuardian::List.new(:file => listfile)
 pp listobject
 
-listfile2 = "/etc/dansguardian/lists/phraselists/goodphrases/weighted_news"
-listobject2 = DansGuardian::List.new(listfile2)
+listfile2 = "/etc/dansguardian/lists/phraselists/pornography/weighted_russian"
+listobject2 = DansGuardian::List.new(
+  :file           => listfile2,
+  :file_encoding  => Encoding.find('ISO-8859-5')
+)
 listobject2.read!
 pp listobject2
 

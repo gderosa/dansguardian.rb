@@ -7,25 +7,26 @@ module DansGuardian
     #   DansGuardian::List.new(:file = '/path/to/list')
     def initialize(h={})
       if h.is_a? String
-        @init         = {:file => h}
+        @init           = {:file => h}
+        @file_encoding  = Encoding::BINARY
       else
-        @init         = h      
+        @init           = h      
       end
-      @items        = []
-      @includes     = []
-      @listcategory = nil
-
+      @items          = []
+      @includes       = []
+      @listcategory   = nil
       #read! if @init[:file] 
     end
 
     def filename; @init[:file]; end
+    def file_encoding; @init[:file_encoding]; end
 
     # Reads the file and fill @items ad @includes . 
     # This method might be overridden for non-trivial list types (?)
     def read!
       File.foreach(@init[:file]) do |line|
+        line.force_encoding file_encoding
         line.strip!
-        line.force_encoding Encoding::BINARY
         # Special comment used to "categorize" DG message pages
         if line =~ /^#listcategory:\s*"(.*)"/ 
           @listcategory = $1
