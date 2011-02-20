@@ -50,7 +50,11 @@ module DansGuardian
               yield "#{key} = #{val}"
             end
           else
-            yield "#{key} = #{new_value}"
+            if new_value == :remove!
+              yield "# #{line}" 
+            else
+              yield "#{key} = #{new_value}"
+            end
           end
           already_written << key
           # next # "optimized out"
@@ -62,6 +66,10 @@ module DansGuardian
 
       to_be_written = 
           data.keys.map{|k| k.to_sym} - already_written.map{|k| k.to_sym}
+      to_be_written.select!{|k| data[k.to_s] || data[k.to_sym]} # reject nil values
+      to_be_written.reject! do |k|
+        (data[k.to_s] || data[k.to_sym]) == :remove!
+      end
       if to_be_written.length > 0
         yield ""
         yield "# Added by ::#{self} :"

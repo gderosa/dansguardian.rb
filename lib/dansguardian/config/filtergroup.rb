@@ -60,7 +60,7 @@ module DansGuardian
 
       # may override the main config file
       parameter :weightedphrasemode,
-        '0'   => false,
+        '0'   => :disabled,
         '1'   => :normal,
         '2'   => :singular
       default   :weightedphrasemode, :inherit
