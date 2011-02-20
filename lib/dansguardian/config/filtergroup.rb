@@ -58,6 +58,12 @@ module DansGuardian
         parameter name 
       end
 
+      # may override the main config file
+      parameter :weightedphrasemode,
+        '0'   => false,
+        '1'   => :normal,
+        '2'   => :singular
+
       parameter :naughtynesslimit, :to_i
 
       virtual   :naughtyness do |confdata|
