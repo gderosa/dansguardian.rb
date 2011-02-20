@@ -4,6 +4,9 @@ autoload :FileUtils,  'fileutils'
 module DansGuardian
   module Updater
 
+    # Update the configuration file +file+ with the +data+ Hash,
+    # preserving the origin file layout, including comments.
+    # The spacial value +:remove!+ comments out the 'key = ...' line.
     def self.update!(file, data)
       tmp = Tempfile.new 'ruby_dansguardian_updater'
       update file, data do |line|
@@ -14,6 +17,8 @@ module DansGuardian
       tmp.unlink
     end
 
+    # Like update! but also accept IO objects and yields updated lines
+    # instead of actually writing to a file.
     def self.update(io_or_file, data)
       if io_or_file.is_a? IO
         io = io_or_file
