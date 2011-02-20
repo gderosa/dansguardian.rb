@@ -1,3 +1,7 @@
+0.4.0 (2011-02-20)
+
+* filtergroup: :weightedphrasemode (may override the main config) 
+
 0.3.0 (2011-02-17)
 
 * lists: file encoding support
