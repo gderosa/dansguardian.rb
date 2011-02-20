@@ -63,6 +63,7 @@ module DansGuardian
         '0'   => false,
         '1'   => :normal,
         '2'   => :singular
+      default   :weightedphrasemode, :inherit
 
       parameter :naughtynesslimit, :to_i
 
