@@ -96,7 +96,7 @@ module DansGuardian
       parameter   :showweightedfound,           BOOL
       
       parameter   :weightedphrasemode,
-        '0'   => false,
+        '0'   => :disabled,
         '1'   => :normal,
         '2'   => :singular
       
