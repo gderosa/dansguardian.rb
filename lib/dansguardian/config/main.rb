@@ -137,36 +137,13 @@ module DansGuardian
 
       parameter   :createlistcachefiles,        BOOL
 
-      parameter   :maxuploadsize do |str|
-        case str
-        when '-1'
-          -1 # should be easily interpreted as 'unlimited'          
-        else
-          str.to_i * 1024
-        end
-      end
+      parameter   :maxuploadsize,               :to_i # KiB
 
-      parameter   :maxcontentfiltersize do |str|
-        case str
-        when '0'
-          lambda {|confdata| confdata[:maxcontentramcachescansize]} 
-        else
-          str.to_i * 1024
-        end
-      end
+      parameter   :maxcontentfiltersize,        :to_i # KiB
 
-      parameter   :maxcontentramcachescansize do |str|
-        case str
-        when '0'
-          lambda {|confdata| confdata[:maxcontentfilecachescansize]}
-        else
-          str.to_i * 1024
-        end
-      end
+      parameter   :maxcontentramcachescansize,  :to_i # KiB
 
-      parameter   :maxcontentfilecachescansize do |str| 
-        str.to_i * 1024
-      end
+      parameter   :maxcontentfilecachescansize, :to_i # KiB 
 
       parameter   :filecachedir
 
