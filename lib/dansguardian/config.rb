@@ -3,6 +3,9 @@ require 'dansguardian/config/filtergroup'
 
 module DansGuardian
   class Config
+
+    autoload :Auth, 'dansguardian/config/auth'
+
     # +arg+ May be +String+-like (the main config file name) or +Hash+-like :
     #
     #   DansGuardian::Config.new('path/to/dansguardian.conf')
