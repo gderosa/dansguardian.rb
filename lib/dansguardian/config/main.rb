@@ -180,8 +180,13 @@ module DansGuardian
       # You don't really need to lazy-evaluate (short) Arrays
       #
       parameter   :downloadmanager              # Array    
+      default     :downloadmanager,             []
+
       parameter   :contentscanner               # Array
+      default     :contentscanner,              []
+
       parameter   :authplugin                   # Array
+      default     :authplugin,                  []
 
       parameter   :contentscannertimeout,       :to_i
       default     :contentscannertimeout,       60
