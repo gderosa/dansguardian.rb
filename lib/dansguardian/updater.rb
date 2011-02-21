@@ -76,10 +76,15 @@ module DansGuardian
         (data[k.to_s] || data[k.to_sym]) == :remove!
       end
       if to_be_written.length > 0
-        yield ""
-        yield "# Added by ::#{self} :"
         to_be_written.each do |k|
-          yield "#{k} = #{data[k] || data[k.to_s]}" 
+          v = data[k] || data[k.to_s]
+          if v.respond_to? :each
+            v.each do |val|
+              yield "#{k} = #{val}"  
+            end
+          else
+            yield "#{k} = #{v}" 
+          end
         end
       end
 
