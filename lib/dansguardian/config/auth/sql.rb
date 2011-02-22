@@ -21,6 +21,7 @@ module DansGuardian
         parameter   :sqlauthdb 
         parameter   :sqlauthdbhost 
         parameter   :sqlauthdbname
+        parameter   :sqlauthdbuser
         parameter   :sqlauthdbpass 
 
         parameter   :sqlauthipuserquery
