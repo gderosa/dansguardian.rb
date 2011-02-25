@@ -1,3 +1,7 @@
+0.5.2 (2011-02-25)
+
+* fix major flaws in gemspec (missing files, ouch!)
+
 0.5.1 (2011-02-24)
 
 * add sqlauthdbuser

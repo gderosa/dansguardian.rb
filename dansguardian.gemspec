@@ -15,7 +15,10 @@ Gem::Specification.new do |s|
   s.files = [
     "lib/dansguardian/config/filtergroup.rb", 
     "lib/dansguardian/config/main.rb", 
+    "lib/dansguardian/config/auth.rb",
+    "lib/dansguardian/config/auth/sql.rb",
     "lib/dansguardian/config/constants.rb", 
+    "lib/dansguardian/config/filtergroup.rb",
     "lib/dansguardian/extensions/float.rb", 
     "lib/dansguardian/parser.rb", 
     "lib/dansguardian/config.rb", 
