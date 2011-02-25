@@ -2,6 +2,8 @@
 
 $LOAD_PATH.unshift File.join File.dirname(__FILE__), 'lib'
 
+require 'date'
+
 require 'dansguardian'
 
 Gem::Specification.new do |s|
