@@ -27,7 +27,7 @@ module DansGuardian
         parameter   :sqlauthipuserquery
         parameter   :sqlauthusergroupquery
         
-        parameter   :sqlauthcachettl
+        parameter   :sqlauthcachettl, :to_i
 
         parameter   :sqlauthdebug,
           'on'        => true,
